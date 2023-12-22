@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<script>
+var wsServer = 'ws://127.0.0.1:30868/ws';
+var websocket = new WebSocket(wsServer);
+websocket.onopen = function (evt) {
+	var data = {
+			source:"php",
+			cid:1,
+			msg:{
+				type:1,
+			},
+		};
+    console.log("Connected to WebSocket server.");
+	websocket.send(JSON.stringify(data));
+};
+
+websocket.onclose = function (evt) {
+    console.log("Disconnected");
+};
+
+websocket.onmessage = function (evt) {
+    console.log('Retrieved data from server: ' + evt.data);
+};
+
+websocket.onerror = function (evt, e) {
+    console.log('Error occured: ' + evt.data);
+};
+</script>
+</html>
